@@ -6,8 +6,6 @@ import org.springframework.stereotype.Repository;
 import cursoudemyjava.domain.Categoria;
 
 @Repository
-public interface CategoriaRepositoy extends JpaRepository<Categoria, Integer>{
+public interface CategoriaRepositoy extends JpaRepository<Categoria, Integer> {
 
-	
-	
 }
