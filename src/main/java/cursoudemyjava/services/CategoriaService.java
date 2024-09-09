@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cursoudemyjava.domain.Categoria;
-import cursoudemyjava.repositories.CategoriaRepositoy;
+import cursoudemyjava.repositories.CategoriaRepository;
 
 @Service
 public class CategoriaService {
 
 	@Autowired
-	private CategoriaRepositoy categoriaRepositoy;
+	private CategoriaRepository categoriaRepositoy;
 
 	public Categoria buscar(Integer id) {
 
