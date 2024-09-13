@@ -2,8 +2,10 @@ package cursoudemyjava.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import org.hibernate.annotations.ManyToAny;
 
@@ -15,9 +17,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.OneToMany;
 
 @Entity
-public class Produto  implements Serializable {
+public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -28,15 +31,15 @@ public class Produto  implements Serializable {
 
 	@JsonBackReference
 	@ManyToAny
-	@JoinTable( //relacionamento entre a tabela produto e categoria
-	name ="produto-categoria",
-	joinColumns = @JoinColumn(name="produto_id"), //chave estrangeira 
-	inverseJoinColumns = @JoinColumn(name="categoria_id")//chave estrangeira que referencia a categoria
+	@JoinTable( // relacionamento entre a tabela produto e categoria
+			name = "produto-categoria", joinColumns = @JoinColumn(name = "produto_id"), // chave estrangeira
+			inverseJoinColumns = @JoinColumn(name = "categoria_id")// chave estrangeira que referencia a categoria
 	)
-	
-	
 	private List<Categoria> categorias = new ArrayList<>();
-	
+
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedido> items = new HashSet<>();
+
 	public Produto() {
 		// TODO Auto-generated constructor stub
 	}
@@ -46,6 +49,14 @@ public class Produto  implements Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
+	}
+	
+	public List<Pedido> getPedidos(){
+		List<Pedido> lista = new ArrayList<>();
+		for(ItemPedido x :  items ) {
+			lista.add(x.getPedido());
+		}
+		return lista;
 	}
 
 	public Integer getId() {
@@ -80,6 +91,16 @@ public class Produto  implements Serializable {
 		this.categorias = categorias;
 	}
 
+
+
+	public Set<ItemPedido> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<ItemPedido> items) {
+		this.items = items;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -100,5 +121,4 @@ public class Produto  implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
-	
 }
