@@ -3,6 +3,8 @@ package cursoudemyjava.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import cursoudemyjava.domain.enums.EstadoPagamento;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,20 +16,20 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Pagamento  implements Serializable {
+public abstract class Pagamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	
+
 	private Integer id;
 	private Integer estadoPagamento;
-	
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	@MapsId
 	private Pedido pedido;
-	
+
 	public Pagamento() {
 		// TODO Auto-generated constructor stub
 	}
@@ -82,6 +84,5 @@ public abstract class Pagamento  implements Serializable {
 		Pagamento other = (Pagamento) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
 }

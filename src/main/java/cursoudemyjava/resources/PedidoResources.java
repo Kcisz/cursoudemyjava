@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cursoudemyjava.domain.Categoria;
-import cursoudemyjava.services.CategoriaService;
+import cursoudemyjava.domain.Pedido;
+import cursoudemyjava.services.PedidoService;
 
 @RestController
-@RequestMapping(value = "/categorias")
-public class CategoriaResources {
+@RequestMapping(value = "/pedidos")
+public class PedidoResources {
 	@Autowired
-	private CategoriaService service;
+	private PedidoService service;
 
 //	@RequestMapping(method = RequestMethod.GET)
-	@GetMapping(value = "/{id}", name = "categorias/{id}")
+	@GetMapping(value = "/{id}", name = "pedidos/{id}")
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 
-		Categoria obj = service.buscar(id);
+		Pedido obj = service.buscar(id);
 
 		return ResponseEntity.ok().body(obj);
 

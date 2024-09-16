@@ -119,7 +119,7 @@ public class CursoudemyjavaApplication implements CommandLineRunner {
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pgto1,pgto2));
-		
+		 
 		
 		ItemPedido ip1 = new ItemPedido(ped1, prod1, 0.00, 1, 2000.00);
 		ItemPedido ip2 = new ItemPedido(ped1, prod3, 0.00, 2, 80.00);
