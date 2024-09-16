@@ -9,7 +9,6 @@ import java.util.Set;
 
 import org.hibernate.annotations.ManyToAny;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -30,7 +29,7 @@ public class Produto implements Serializable {
 	private String nome;
 	private double preco;
 
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToAny
 	@JoinTable( // relacionamento entre a tabela produto e categoria
 			name = "produto-categoria", joinColumns = @JoinColumn(name = "produto_id"), // chave estrangeira
